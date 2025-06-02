@@ -1,4 +1,3 @@
-
 const romanMap = [
   [1000, 'M'], [900, 'CM'], [500, 'D'], [400, 'CD'],
   [100, 'C'], [90, 'XC'], [50, 'L'], [40, 'XL'],
@@ -60,8 +59,15 @@ function convertToRoman() {
     showError('Invalid number (1-3999)');
     return;
   }
-    
-  resultDiv.textContent = toRoman(number);
+
+  const roman = toRoman(number);
+  resultDiv.textContent = roman;
+
+  if (typeof gtag === 'function') {
+    gtag('event', 'integer_to_roman_calculated', {
+      'roman': roman
+    });
+  }
 }
 
 function convertToInteger() {
@@ -84,6 +90,12 @@ function convertToInteger() {
   }
     
   resultDiv.textContent = result;
+
+  if (typeof gtag === 'function') {
+    gtag('event', 'roman_to_integer_calculated', {
+      'integer': result
+    });
+  }
 }
 
 function showError(message) {
